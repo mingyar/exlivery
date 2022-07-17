@@ -19,18 +19,16 @@ defmodule Exlivery.Orders.OrderTest do
 
       response = Order.build(user, items)
 
-      expected_response = ""
+      expected_response = {:ok, build(:order)}
       assert response == expected_response
     end
 
-    test "when there is invalid category, returns an error" do
-      response =
-        Item.build(
-          "Pizza",
-          :random,
-          35.5,
-          1
-        )
+    test "when there is no items in the order, returns an error" do
+      user = build(:user)
+
+      items = []
+
+      response = Order.build(user, items)
 
       expected_response = {:error, "Invalid parameters"}
       assert response == expected_response

@@ -24,25 +24,19 @@ defmodule Exlivery.Factory do
   end
 
   def order_factory do
-    {:ok,
-     %Exlivery.Orders.Order{
-       delivery_address: "Baker St.",
-       items: [
-         %Exlivery.Orders.Item{
-           category: :pizza,
-           description: "Pizza",
-           quantity: 1,
-           unity_price: Decimal.new("35.50")
-         },
-         %Exlivery.Orders.Item{
-           category: :japonesa,
-           description: "Temaki",
-           quantity: 2,
-           unity_price: Decimal.new("20.50")
-         }
-       ],
-       total_price: Decimal.new("76.50"),
-       user_cpf: "12345677"
-     }}
+    %Order{
+      delivery_address: "Baker St.",
+      items: [
+        build(:item),
+        build(:item,
+          description: "Temaki",
+          category: :japonesa,
+          quantity: 2,
+          unity_price: Decimal.new("20.50")
+        )
+      ],
+      total_price: Decimal.new("76.50"),
+      user_cpf: "12345677"
+    }
   end
 end
